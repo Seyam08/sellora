@@ -181,6 +181,13 @@
   --tracking-widest: calc(var(--tracking-normal) + 0.1em);
 }
 
-body {
-  letter-spacing: var(--tracking-normal);
+@layer base {
+  body {
+    letter-spacing: var(--tracking-normal);
+  }
+}
+@layer components {
+  .width-holder {
+    @apply max-w-6xl 2xl:max-w-7xl w-full mx-auto;
+  }
 }
