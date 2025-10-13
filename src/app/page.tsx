@@ -1,12 +1,10 @@
-import Navbar from "@/components/nav-menu";
+import PublicHeader from "@/components/header/public-header";
 import Image from "next/image";
 
 export default function Home() {
   return (
     <div className="">
-      <div>
-        <Navbar />
-      </div>
+      <PublicHeader />
       <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
         <div>
           <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight text-balance">
