@@ -65,7 +65,14 @@
   --shadow-offset-y: 1px;
   --letter-spacing: 0.025em;
 }
-
+:root {
+  body[data-scroll-locked][data-scroll-locked] {
+    overflow: auto !important;
+  }
+  body[data-scroll-locked] {
+    margin-right: 0 !important;
+  }
+}
 .dark {
   --background: oklch(0.1822 0 0);
   --foreground: oklch(0.9288 0.0126 255.5078);
@@ -199,13 +206,11 @@
 
 @layer base {
   body {
+    @apply bg-background text-foreground;
     letter-spacing: var(--tracking-normal);
   }
   * {
     @apply border-border outline-ring/50;
-  }
-  body {
-    @apply bg-background text-foreground;
   }
 }
 @layer components {
