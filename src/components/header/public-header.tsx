@@ -1,6 +1,7 @@
 "use client";
 
 import Navbar from "@/components/header/components/nav-menu";
+import { ModeToggle } from "@/components/mode-toggle";
 import { Button } from "@/components/ui/button";
 import { useScroll } from "@/hooks/ui/useScroll";
 import { cn } from "@/lib/utils";
@@ -11,10 +12,9 @@ function PublicHeader({ sticky = true }: { sticky?: boolean }) {
   const { isScrollBottom, isScrollTop, isScrollUp } = useScroll(100);
 
   return (
-    <header className="">
+    <header>
       <div
         className={cn(
-          "transition-all ease-in-out duration-300",
           sticky
             ? [
                 "bg-background fixed inset-x-0 top-0 transition-all ease-in-out duration-300 border-0 border-border",
@@ -48,7 +48,7 @@ function PublicHeader({ sticky = true }: { sticky?: boolean }) {
             <div>
               <Button variant="outline">Login</Button>
             </div>
-            {/* <ToogleMode customClass={"bg-slate-300 bg-opacity-20"} /> */}
+            <ModeToggle />
           </div>
 
           {/* <MobileMenu
