@@ -58,10 +58,8 @@ type PropType = ComponentPropsWithRef<"button">;
 
 export function PrevNextButton({ children, ...rest }: PropType): JSX.Element {
   return (
-    <div className="flex flex-col gap-8">
-      <Button variant="outline" size="icon" className="rounded-full" {...rest}>
-        {children}
-      </Button>
-    </div>
+    <Button variant="outline" size="icon" className="rounded-md" {...rest}>
+      {children}
+    </Button>
   );
 }

@@ -1,8 +1,9 @@
 import { EmblaOptionsType } from "embla-carousel";
 import Fade from "embla-carousel-fade";
 import useEmblaCarousel from "embla-carousel-react";
-import { ArrowLeft, ArrowRight } from "lucide-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import React from "react";
+import "../styles/carousel.css";
 import { PrevNextButton, usePrevNextButtons } from "./CarouselArrowButtons";
 import { DotButton, useDotButton } from "./CarouselDotButton";
 
@@ -26,13 +27,13 @@ const Carousel: React.FC<PropType> = (props) => {
   } = usePrevNextButtons(emblaApi);
 
   return (
-    <div className="embla">
-      <div className="embla__viewport" ref={emblaRef}>
-        <div className="embla__container">
+    <div className="carousel relative">
+      <div className="carousel_viewport" ref={emblaRef}>
+        <div className="carousel_container">
           {slides.map((index) => (
-            <div className="embla__slide" key={index}>
+            <div className="carousel_slide" key={index}>
               <img
-                className="embla__slide__img"
+                className="carousel_slide__img"
                 src={`https://picsum.photos/600/350?v=${index}`}
                 alt="Your alt text"
               />
@@ -41,16 +42,13 @@ const Carousel: React.FC<PropType> = (props) => {
         </div>
       </div>
 
-      <div className="embla__controls">
-        <div className="embla__buttons">
-          {/* <PrevButton onClick={onPrevButtonClick} disabled={prevBtnDisabled} /> */}
-          {/* <NextButton onClick={onNextButtonClick} disabled={nextBtnDisabled} /> */}
-          {/* prev button  */}
+      <div className="carousel_controls w-full absolute bottom-0 p-3">
+        <div className="carousel_buttons">
           <PrevNextButton
             onClick={onPrevButtonClick}
             disabled={prevBtnDisabled}
           >
-            <ArrowLeft />
+            <ChevronLeft />
           </PrevNextButton>
 
           {/* next button  */}
@@ -58,11 +56,11 @@ const Carousel: React.FC<PropType> = (props) => {
             onClick={onNextButtonClick}
             disabled={nextBtnDisabled}
           >
-            <ArrowRight />
+            <ChevronRight />
           </PrevNextButton>
         </div>
 
-        <div className="embla__dots">
+        <div className="carousel_dots">
           {scrollSnaps.map((_, index) => (
             <DotButton
               key={index}

@@ -2,7 +2,6 @@
 
 import { EmblaOptionsType } from "embla-carousel";
 import Carousel from "./components/Carousel";
-import "./styles/embla.css";
 
 const OPTIONS: EmblaOptionsType = { loop: false, duration: 30 };
 const SLIDE_COUNT = 5;
