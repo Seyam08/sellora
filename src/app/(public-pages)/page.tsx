@@ -1,4 +1,4 @@
-import Carousel from "@/components/carousel/carousel";
+import LandingCarousel from "@/components/carousel/LandingCarousel";
 
 export default function PublicPage() {
   return (
@@ -11,7 +11,7 @@ export default function PublicPage() {
         spent all day lounging on his throne. One day, his advisors came to him
         with a problem: the kingdom was running out of money.
       </p>
-      <Carousel />
+      <LandingCarousel />
       <h2 className="mt-10 scroll-m-20 border-b border-amber-100 pb-2 text-3xl font-semibold tracking-tight transition-colors first:mt-0">
         The King&apos;s Plan
       </h2>

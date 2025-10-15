@@ -1,20 +1,17 @@
 import { EmblaOptionsType } from "embla-carousel";
 import Fade from "embla-carousel-fade";
 import useEmblaCarousel from "embla-carousel-react";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 import React from "react";
-import {
-  NextButton,
-  PrevButton,
-  usePrevNextButtons,
-} from "./EmblaCarouselArrowButtons";
-import { DotButton, useDotButton } from "./EmblaCarouselDotButton";
+import { PrevNextButton, usePrevNextButtons } from "./CarouselArrowButtons";
+import { DotButton, useDotButton } from "./CarouselDotButton";
 
 type PropType = {
   slides: number[];
   options?: EmblaOptionsType;
 };
 
-const EmblaCarousel: React.FC<PropType> = (props) => {
+const Carousel: React.FC<PropType> = (props) => {
   const { slides, options } = props;
   const [emblaRef, emblaApi] = useEmblaCarousel(options, [Fade()]);
 
@@ -46,8 +43,23 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
 
       <div className="embla__controls">
         <div className="embla__buttons">
-          <PrevButton onClick={onPrevButtonClick} disabled={prevBtnDisabled} />
-          <NextButton onClick={onNextButtonClick} disabled={nextBtnDisabled} />
+          {/* <PrevButton onClick={onPrevButtonClick} disabled={prevBtnDisabled} /> */}
+          {/* <NextButton onClick={onNextButtonClick} disabled={nextBtnDisabled} /> */}
+          {/* prev button  */}
+          <PrevNextButton
+            onClick={onPrevButtonClick}
+            disabled={prevBtnDisabled}
+          >
+            <ArrowLeft />
+          </PrevNextButton>
+
+          {/* next button  */}
+          <PrevNextButton
+            onClick={onNextButtonClick}
+            disabled={nextBtnDisabled}
+          >
+            <ArrowRight />
+          </PrevNextButton>
         </div>
 
         <div className="embla__dots">
@@ -66,4 +78,4 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
   );
 };
 
-export default EmblaCarousel;
+export default Carousel;
