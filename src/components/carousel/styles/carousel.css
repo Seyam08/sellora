@@ -2,17 +2,15 @@
 
 .carousel {
   @apply w-full m-auto;
-  --slide-spacing: 1rem;
-  --slide-size: 100%;
 }
 .carousel_viewport {
   @apply overflow-hidden;
 }
 .carousel_container {
-  @apply flex touch-pan-y touch-pinch-zoom ml-[calc(var(--slide-spacing)*-1)];
+  @apply flex touch-pan-y touch-pinch-zoom;
 }
 .carousel_slide {
-  @apply flex shrink-0 grow-0 basis-(--slide-size) min-w-0 pl-(--slide-spacing);
+  @apply flex shrink-0 grow-0 basis-full min-w-0;
 }
 .carousel_controls {
   @apply grid grid-cols-[auto_1fr] justify-between gap-5 mt-5;
