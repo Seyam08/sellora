@@ -66,7 +66,7 @@ export default function CarouselOne({ slides, options }: PropType) {
               key={index}
               onClick={() => onDotButtonClick(index)}
               pressed={index === selectedIndex}
-              className="mx-0.5 opacity-70 border border-border rounded-full h-2 cursor-pointer transition-all"
+              className="mx-0.5 opacity-70 border border-border rounded-full h-1 md:h-2 min-w-5 md:min-w-8 cursor-pointer transition-all"
             ></DotButton>
           ))}
         </div>
