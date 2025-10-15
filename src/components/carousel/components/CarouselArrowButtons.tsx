@@ -61,7 +61,7 @@ export function PrevNextButton({ children, ...rest }: PropType): JSX.Element {
     <Button
       variant="outline"
       size="sm"
-      className="rounded-md opacity-50 cursor-pointer disabled:opacity-30 disabled:cursor-not-allowed disabled:pointer-events-auto"
+      className="h-6 w-6 md:h-8 md:w-8 rounded-md opacity-50 cursor-pointer disabled:opacity-30 disabled:cursor-not-allowed disabled:pointer-events-auto"
       {...rest}
     >
       {children}
