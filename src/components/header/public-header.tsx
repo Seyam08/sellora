@@ -17,7 +17,7 @@ function PublicHeader({ sticky = true }: { sticky?: boolean }) {
         className={cn(
           sticky
             ? [
-                "bg-background fixed inset-x-0 top-0 transition-all ease-in-out duration-300 border-0 border-border",
+                "bg-background fixed inset-x-0 top-0 transition-all ease-in-out duration-300 border-0 border-border z-50",
                 isScrollTop === false &&
                   isScrollUp === false &&
                   "transform -translate-y-full",
