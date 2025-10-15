@@ -2,7 +2,6 @@
 
 .carousel {
   @apply w-full m-auto;
-  --slide-height: 25rem;
   --slide-spacing: 1rem;
   --slide-size: 100%;
 }
@@ -15,9 +14,6 @@
 .carousel_slide {
   @apply flex shrink-0 grow-0 basis-(--slide-size) min-w-0 pl-(--slide-spacing);
 }
-.carousel_slide__img {
-  @apply rounded-sm block h-(--slide-height) w-full object-cover;
-}
 .carousel_controls {
   @apply grid grid-cols-[auto_1fr] justify-between gap-5 mt-5;
 }
@@ -26,7 +22,4 @@
 }
 .carousel_dots {
   @apply flex flex-wrap justify-end items-center;
-}
-.carousel_slide__img {
-  user-select: none;
 }

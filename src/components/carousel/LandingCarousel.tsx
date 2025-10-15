@@ -1,17 +1,48 @@
 "use client";
 
 import { EmblaOptionsType } from "embla-carousel";
-import Carousel from "./components/Carousel";
+import CarouselOne from "./carousel-types/CarouselOne";
 
 const OPTIONS: EmblaOptionsType = { loop: false, duration: 30 };
-const SLIDE_COUNT = 5;
-const SLIDES = Array.from(Array(SLIDE_COUNT).keys());
+
+const slides = [
+  <img
+    className="rounded-sm block h-96 w-full object-cover"
+    src={`https://picsum.photos/600/350?v=1`}
+    alt="Your alt text"
+  />,
+  <img
+    className="rounded-sm block h-96 w-full object-cover"
+    src={`https://picsum.photos/600/350?v=2`}
+    alt="Your alt text"
+  />,
+  <img
+    className="rounded-sm block h-96 w-full object-cover"
+    src={`https://picsum.photos/600/350?v=3`}
+    alt="Your alt text"
+  />,
+  <img
+    className="rounded-sm block h-96 w-full object-cover"
+    src={`https://picsum.photos/600/350?v=4`}
+    alt="Your alt text"
+  />,
+  <img
+    className="rounded-sm block h-96 w-full object-cover"
+    src={`https://picsum.photos/600/350?v=5`}
+    alt="Your alt text"
+  />,
+  <img
+    className="rounded-sm block h-96 w-full object-cover"
+    src={`https://picsum.photos/600/350?v=6`}
+    alt="Your alt text"
+  />,
+];
 
 export default function LandingCarousel() {
   return (
     <>
       <div className="carousel">
-        <Carousel slides={SLIDES} options={OPTIONS} />
+        <CarouselOne slides={slides} options={OPTIONS} />
       </div>
     </>
   );

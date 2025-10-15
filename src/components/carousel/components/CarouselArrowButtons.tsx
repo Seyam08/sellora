@@ -58,7 +58,12 @@ type PropType = ComponentPropsWithRef<"button">;
 
 export function PrevNextButton({ children, ...rest }: PropType): JSX.Element {
   return (
-    <Button variant="outline" size="icon" className="rounded-md" {...rest}>
+    <Button
+      variant="outline"
+      size="sm"
+      className="rounded-md opacity-50 cursor-pointer disabled:opacity-30 disabled:cursor-not-allowed disabled:pointer-events-auto"
+      {...rest}
+    >
       {children}
     </Button>
   );

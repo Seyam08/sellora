@@ -3,17 +3,19 @@ import Fade from "embla-carousel-fade";
 import useEmblaCarousel from "embla-carousel-react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import React from "react";
+import {
+  PrevNextButton,
+  usePrevNextButtons,
+} from "../components/CarouselArrowButtons";
+import { DotButton, useDotButton } from "../components/CarouselDotButton";
 import "../styles/carousel.css";
-import { PrevNextButton, usePrevNextButtons } from "./CarouselArrowButtons";
-import { DotButton, useDotButton } from "./CarouselDotButton";
 
 type PropType = {
-  slides: number[];
+  slides: React.ReactNode[];
   options?: EmblaOptionsType;
 };
 
-const Carousel: React.FC<PropType> = (props) => {
-  const { slides, options } = props;
+export default function CarouselOne({ slides, options }: PropType) {
   const [emblaRef, emblaApi] = useEmblaCarousel(options, [Fade()]);
 
   const { selectedIndex, scrollSnaps, onDotButtonClick } =
@@ -30,15 +32,13 @@ const Carousel: React.FC<PropType> = (props) => {
     <div className="carousel relative">
       <div className="carousel_viewport" ref={emblaRef}>
         <div className="carousel_container">
-          {slides.map((index) => (
-            <div className="carousel_slide" key={index}>
-              <img
-                className="carousel_slide__img"
-                src={`https://picsum.photos/600/350?v=${index}`}
-                alt="Your alt text"
-              />
-            </div>
-          ))}
+          {slides.map((item, index) => {
+            return (
+              <div className="carousel_slide" key={index}>
+                {item}
+              </div>
+            );
+          })}
         </div>
       </div>
 
@@ -66,13 +66,11 @@ const Carousel: React.FC<PropType> = (props) => {
               key={index}
               onClick={() => onDotButtonClick(index)}
               pressed={index === selectedIndex}
-              className="mx-0.5 border border-border rounded-full h-2"
+              className="mx-0.5 opacity-70 border border-border rounded-full h-2 cursor-pointer transition-all"
             ></DotButton>
           ))}
         </div>
       </div>
     </div>
   );
-};
-
-export default Carousel;
+}
