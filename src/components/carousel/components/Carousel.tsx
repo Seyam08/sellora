@@ -67,10 +67,9 @@ const Carousel: React.FC<PropType> = (props) => {
             <DotButton
               key={index}
               onClick={() => onDotButtonClick(index)}
-              className={"embla__dot".concat(
-                index === selectedIndex ? " embla__dot--selected" : ""
-              )}
-            />
+              pressed={index === selectedIndex}
+              className="mx-0.5 border border-border rounded-full h-2"
+            ></DotButton>
           ))}
         </div>
       </div>

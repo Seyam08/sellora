@@ -1,10 +1,6 @@
+import { Toggle } from "@/components/ui/toggle";
 import { EmblaCarouselType } from "embla-carousel";
-import React, {
-  ComponentPropsWithRef,
-  useCallback,
-  useEffect,
-  useState,
-} from "react";
+import { ComponentPropsWithRef, useCallback, useEffect, useState } from "react";
 
 type UseDotButtonType = {
   selectedIndex: number;
@@ -52,14 +48,14 @@ export const useDotButton = (
   };
 };
 
-type PropType = ComponentPropsWithRef<"button">;
-
-export const DotButton: React.FC<PropType> = (props) => {
-  const { children, ...restProps } = props;
-
-  return (
-    <button type="button" {...restProps}>
-      {children}
-    </button>
-  );
+type PropType = ComponentPropsWithRef<"button"> & {
+  pressed: boolean;
 };
+
+export function DotButton({ children, pressed, ...rest }: PropType) {
+  return (
+    <Toggle aria-label="Toggle" pressed={pressed} {...rest}>
+      {children}
+    </Toggle>
+  );
+}
