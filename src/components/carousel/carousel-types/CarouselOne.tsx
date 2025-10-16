@@ -8,7 +8,6 @@ import {
   usePrevNextButtons,
 } from "../components/CarouselArrowButtons";
 import { DotButton, useDotButton } from "../components/CarouselDotButton";
-import "../styles/carousel.css";
 
 type PropType = {
   slides: React.ReactNode[];
