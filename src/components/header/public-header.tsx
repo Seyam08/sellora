@@ -7,6 +7,7 @@ import { useScroll } from "@/hooks/ui/useScroll";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
+import { MobileMenu } from "./components/mobile-menu";
 
 function PublicHeader({ sticky = true }: { sticky?: boolean }) {
   const { isScrollBottom, isScrollTop, isScrollUp } = useScroll(100);
@@ -42,7 +43,7 @@ function PublicHeader({ sticky = true }: { sticky?: boolean }) {
             </div>
           </div>
 
-          <Navbar />
+          <Navbar className={"hidden md:block"} />
 
           <div className="flex space-x-2 ml-auto md:ml-0">
             <div>
@@ -51,11 +52,7 @@ function PublicHeader({ sticky = true }: { sticky?: boolean }) {
             <ModeToggle />
           </div>
 
-          {/* <MobileMenu
-          customClass={"md:hidden"}
-          menuItem={publicMenu}
-          color="text-white"
-        /> */}
+          <MobileMenu className={"block md:hidden"} />
         </div>
       </div>
     </header>

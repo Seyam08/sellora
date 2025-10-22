@@ -52,9 +52,14 @@ const components: { title: string; href: string; description: string }[] = [
   },
 ];
 
-export default function Navbar() {
+export default function Navbar({
+  className,
+  ...rest
+}: {
+  className?: React.ComponentProps<"div">["className"];
+}) {
   return (
-    <NavigationMenu viewport={false}>
+    <NavigationMenu className={className} viewport={false} {...rest}>
       <NavigationMenuList>
         <NavigationMenuItem>
           <NavigationMenuTrigger>Home</NavigationMenuTrigger>
