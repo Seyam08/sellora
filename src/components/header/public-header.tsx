@@ -5,8 +5,7 @@ import { ModeToggle } from "@/components/mode-toggle";
 import { Button } from "@/components/ui/button";
 import { useScroll } from "@/hooks/ui/useScroll";
 import { cn } from "@/lib/utils";
-import Image from "next/image";
-import Link from "next/link";
+import Logo from "../logo";
 import { MobileMenu } from "./components/mobile-menu";
 
 function PublicHeader({ sticky = true }: { sticky?: boolean }) {
@@ -30,18 +29,7 @@ function PublicHeader({ sticky = true }: { sticky?: boolean }) {
         )}
       >
         <div className="flex items-center justify-between gap-3 width-holder px-4 py-3 md:px-6">
-          <div>
-            <div className="h-10 w-20 flex items-center">
-              <Link href={"/"}>
-                <Image
-                  src="/sellora-logo.png"
-                  alt="logo"
-                  width={500}
-                  height={500}
-                />
-              </Link>
-            </div>
-          </div>
+          <Logo />
 
           <Navbar className={"hidden md:block"} />
 
