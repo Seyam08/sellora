@@ -78,7 +78,7 @@ export function CarouselThree({ slides, options, autoplayOption }: PropType) {
       </div>
 
       {/* Controls */}
-      <div className="carousel_controls w-full absolute bottom-0 p-3">
+      <div className="carousel_controls w-full absolute bottom-0 left-1/2 transform -translate-x-1/2 py-3">
         <div className="carousel_dots">
           {scrollSnaps.map((_: number, index: number) => {
             return (
@@ -109,13 +109,13 @@ export function CarouselThree({ slides, options, autoplayOption }: PropType) {
                         index === selectedIndex
                           ? `${autoplayOption?.delay ?? 4000}ms`
                           : "200ms",
-                      width: `${250 / slides.length}px`,
+                      width: `${100 / slides.length}px`,
                     }}
                   />
                   {/* Grey Bar BG */}
                   <div
                     className="h-0.5 bg-accent opacity-40"
-                    style={{ width: `${250 / slides.length}px` }}
+                    style={{ width: `${100 / slides.length}px` }}
                   />
                 </div>
               </Button>
@@ -127,7 +127,7 @@ export function CarouselThree({ slides, options, autoplayOption }: PropType) {
           <Button
             aria-label={isPlaying ? "Pause" : "Play"}
             variant={"outline"}
-            size={"icon"}
+            size={"icon-sm"}
             onClick={toggleAutoplay}
             className="cursor-pointer bg-accent/50 border-border/50"
           >
