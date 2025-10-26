@@ -28,7 +28,7 @@ function PublicHeader({ sticky = true }: { sticky?: boolean }) {
             : "flex justify-between items-center bg-background"
         )}
       >
-        <div className="flex items-center justify-between gap-3 width-holder px-4 py-3 md:px-6">
+        <div className="flex items-center justify-between gap-3 width-holder py-3">
           <Logo />
 
           <Navbar className={"hidden md:block"} />
