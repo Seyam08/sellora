@@ -215,6 +215,6 @@
 }
 @layer components {
   .width-holder {
-    @apply max-w-6xl 2xl:max-w-7xl w-full mx-auto;
+    @apply max-w-6xl 2xl:max-w-7xl w-full mx-auto px-4;
   }
 }

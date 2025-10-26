@@ -3,7 +3,9 @@ import LandingCarousel from "@/components/carousel/LandingCarousel";
 export default function PublicPage() {
   return (
     <div className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-      <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight text-balance">
+      <LandingCarousel />
+
+      <h1 className="scroll-mt-20 text-4xl font-extrabold tracking-tight text-balance">
         Taxing Laughter: The Joke Tax Chronicles
       </h1>
       <p className="text-muted-foreground text-xl leading-7 [&:not(:first-child)]:mt-6">
@@ -11,7 +13,7 @@ export default function PublicPage() {
         spent all day lounging on his throne. One day, his advisors came to him
         with a problem: the kingdom was running out of money.
       </p>
-      <LandingCarousel />
+
       <h2 className="mt-10 scroll-m-20 border-b border-amber-100 pb-2 text-3xl font-semibold tracking-tight transition-colors first:mt-0">
         The King&apos;s Plan
       </h2>

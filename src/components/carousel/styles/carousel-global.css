@@ -21,3 +21,9 @@
 .carousel_dots {
   @apply flex flex-wrap justify-end items-center;
 }
+.carousel_slide_img {
+  @apply rounded-sm block h-[550px] w-full object-cover dark:opacity-80;
+}
+.carousel_slide_content {
+  @apply max-w-6xl 2xl:max-w-7xl w-full mx-auto px-4 absolute bottom-0 left-1/2 transform -translate-x-1/2 -translate-y-2/5;
+}

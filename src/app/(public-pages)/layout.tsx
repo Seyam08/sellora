@@ -12,7 +12,7 @@ export default function PublicLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <div className="width-holder">
+    <>
       <div>
         <PublicHeader />
       </div>
@@ -23,6 +23,6 @@ export default function PublicLayout({
           <h1 className="text-lg text-lime-600">Footer</h1>
         </footer>
       </div>
-    </div>
+    </>
   );
 }
