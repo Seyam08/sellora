@@ -53,18 +53,19 @@ const slides2 = [
     <div className="carousel_slide_content">
       <div className="w-full md:w-2/3 space-y-10">
         <h2 className="text-3xl md:text-5xl font-bold text-foreground">
-          Fresh finds for every occasion
+          Discover Endless Choices in One Place
         </h2>
         <p className="text-base md:text-xl text-foreground">
-          Explore our top picks in this featured collection. Find the perfect
-          gift or treat yourself!
+          Explore thousands of products from trusted vendors across every
+          category. From daily essentials to exclusive finds — everything you
+          love is just one click away.
         </p>
         <Button
           variant="default"
           size="lg"
           className="bg-foreground text-secondary hover:bg-muted-foreground cursor-pointer"
         >
-          Explore Now
+          Shop Now
         </Button>
       </div>
     </div>
@@ -74,11 +75,12 @@ const slides2 = [
     <div className="carousel_slide_content">
       <div className="w-full md:w-2/3 space-y-10">
         <h2 className="text-3xl md:text-5xl font-bold text-foreground">
-          Fresh finds for every occasion
+          Grow Your Business on Our Marketplace
         </h2>
         <p className="text-base md:text-xl text-foreground">
-          Explore our top picks in this featured collection. Find the perfect
-          gift or treat yourself!
+          Join our vibrant seller community and reach buyers nationwide. Manage
+          orders, track performance, and boost sales — all with powerful tools
+          made for modern vendors.
         </p>
         <Button
           variant="default"
@@ -95,18 +97,19 @@ const slides2 = [
     <div className="carousel_slide_content">
       <div className="w-full md:w-2/3 space-y-10">
         <h2 className="text-3xl md:text-5xl font-bold text-foreground">
-          Fresh finds for every occasion
+          Shop Smarter, Save Bigger
         </h2>
         <p className="text-base md:text-xl text-foreground">
-          Explore our top picks in this featured collection. Find the perfect
-          gift or treat yourself!
+          Don&apos;t just shop — win! Enjoy flash sales, seasonal offers, and
+          exclusive vendor discounts updated daily. Your next favorite deal is
+          waiting for you.
         </p>
         <Button
           variant="default"
           size="lg"
           className="bg-foreground text-secondary hover:bg-muted-foreground cursor-pointer"
         >
-          Explore Now
+          Store
         </Button>
       </div>
     </div>
