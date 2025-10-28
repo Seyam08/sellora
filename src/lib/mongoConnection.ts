@@ -5,7 +5,7 @@ export async function connectDB(): Promise<Mongoose | undefined> {
 
   try {
     if (!MONGO_URI) {
-      throw new Error("Please define the MONGO_URI environment variable");
+      throw new Error();
     }
 
     if (mongoose.connection.readyState >= 1) {
@@ -15,6 +15,6 @@ export async function connectDB(): Promise<Mongoose | undefined> {
     const connection = await mongoose.connect(MONGO_URI);
     return connection;
   } catch (err) {
-    throw new Error("Failed to establish mongoDB connect!");
+    throw new Error("Failed to establish database connection!");
   }
 }

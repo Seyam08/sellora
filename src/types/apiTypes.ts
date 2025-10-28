@@ -3,6 +3,8 @@ export type SuccessResponse<T = undefined> = {
   data?: T;
 };
 export type ErrorResponse<T = undefined> = {
-  message: string;
-  error?: T;
+  errors: {
+    message: string;
+    error?: T;
+  };
 };
