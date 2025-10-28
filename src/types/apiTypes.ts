@@ -1,8 +1,8 @@
-export type SuccessResponse<T> = {
+export type SuccessResponse<T = undefined> = {
   message: string;
-  data: T;
+  data?: T;
 };
-export type ErrorResponse<T> = {
+export type ErrorResponse<T = undefined> = {
   message: string;
-  error: T;
+  error?: T;
 };
