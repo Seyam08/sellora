@@ -1,6 +1,6 @@
 import { checkContentType, ContentReturn } from "@/lib/api/globalApiHelper";
 import { connectDB } from "@/lib/mongoConnection";
-import { ErrorResponse, SuccessResponse } from "@/types/apiTypes";
+import { ErrorResponse, SuccessResponse } from "@/types/api/ResponseTypes";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest): Promise<NextResponse> {
