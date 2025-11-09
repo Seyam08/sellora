@@ -43,7 +43,15 @@ export const ZodClientSchema = z.strictObject({
     .nullable()
     .optional(),
 
-  avatarUrl: z.url("Invalid URL").nullable().optional(),
+  avatar: z
+    .file({ error: "Avatar should be a JPG or PNG file!" })
+    .max(2000000, {
+      error: "File must be less then 2MB",
+    })
+    .mime(["image/png", "image/jpeg"], {
+      error: "Only accept JPG and PNG",
+    })
+    .optional(),
 });
 
 // infer TypeScript type directly from schema

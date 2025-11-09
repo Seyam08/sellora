@@ -1,4 +1,5 @@
 import { generateUniqueId } from "@/helper/getRandomId";
+import { uploadImage } from "@/lib/api/cloudinary/upload-image";
 import {
   checkContentType,
   ContentReturn,
@@ -15,6 +16,7 @@ import { ZodClientSchema } from "@/schemas/client.schema";
 import { ClientResponseType, ClientType } from "@/types/api/RegisterTypes";
 import { ErrorResponse, SuccessResponse } from "@/types/api/ResponseTypes";
 import bcrypt from "bcrypt";
+import { UploadApiResponse } from "cloudinary";
 import { NextRequest, NextResponse } from "next/server";
 import z from "zod";
 
@@ -107,6 +109,19 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
     }
 
     const hashedPassword = await bcrypt.hash(validateData.data?.password, 10);
+    let imageUrl;
+
+    if (validateData.data?.avatar) {
+      const image = validateData.data?.avatar;
+      // upload the image
+      const uploadResult: UploadApiResponse = await uploadImage(
+        image,
+        "sellora-client-avatar"
+      );
+
+      // console.log("Image Result: ", uploadResult);
+      imageUrl = uploadResult.secure_url;
+    }
 
     const validateClient: ClientType = {
       id: generateUniqueId("client"),
@@ -116,7 +131,7 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
       name: validateData.data?.name,
       phoneNumber: validateData.data?.phoneNumber,
       address: validateData.data?.address,
-      avatarUrl: validateData.data?.avatarUrl,
+      avatarUrl: imageUrl,
     };
 
     const savedClient = await Client.create(validateClient);
