@@ -13,7 +13,7 @@ export default function AuthLayout({
 }>) {
   return (
     <div className="bg-muted flex min-h-svh flex-col items-center justify-center gap-6 p-6 md:p-10">
-      <div className="flex w-full max-w-lg flex-col gap-4 items-center justify-center">
+      <div className="flex w-full max-w-xl flex-col gap-4 items-center justify-center">
         <Logo />
 
         {children}

@@ -8,7 +8,7 @@ export const ZodClientSchema = z.strictObject({
         ? `${issue.path} is required.`
         : `${issue.path} should be ${issue.expected}.`,
   }),
-  name: z.string({ error: "Name should be string!" }).nullable().optional(),
+  name: z.string({ error: "Name should be string!" }).optional(),
   email: z.email({
     error: (issue) =>
       issue.input === undefined
@@ -38,10 +38,7 @@ export const ZodClientSchema = z.strictObject({
       return phone?.isValid();
     }, "Invalid phone number"),
 
-  address: z
-    .string({ error: "Address should be string!" })
-    .nullable()
-    .optional(),
+  address: z.string({ error: "Address should be string!" }).optional(),
 
   avatar: z
     .file({ error: "Avatar should be a JPG or PNG file!" })

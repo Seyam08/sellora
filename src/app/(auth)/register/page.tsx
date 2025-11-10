@@ -1,5 +1,6 @@
-import { SignupForm } from "@/components/forms/signup-form";
+import { UserRegistrationForm } from "@/components/forms/user-registration/user-registration";
 
-export default function Register() {
-  return <SignupForm />;
+export default async function Register() {
+  await new Promise((resolve) => setTimeout(() => resolve("ds"), 2000));
+  return <UserRegistrationForm />;
 }
