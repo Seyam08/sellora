@@ -15,6 +15,7 @@ import { Client } from "@/models/Client";
 import { ZodClientSchema } from "@/schemas/client.schema";
 import { ClientResponseType, ClientType } from "@/types/api/RegisterTypes";
 import { ErrorResponse, SuccessResponse } from "@/types/api/ResponseTypes";
+import { ImageUrl } from "@/types/globalTypes";
 import bcrypt from "bcrypt";
 import { UploadApiResponse } from "cloudinary";
 import { NextRequest, NextResponse } from "next/server";
@@ -109,7 +110,8 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
     }
 
     const hashedPassword = await bcrypt.hash(validateData.data?.password, 10);
-    let imageUrl;
+
+    let imageUrl: ImageUrl | undefined;
 
     if (validateData.data?.avatar) {
       const image = validateData.data?.avatar;
@@ -120,7 +122,10 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
       );
 
       // console.log("Image Result: ", uploadResult);
-      imageUrl = uploadResult.secure_url;
+      imageUrl = {
+        url: uploadResult.secure_url,
+        publicId: uploadResult.public_id,
+      };
     }
 
     const validateClient: ClientType = {
@@ -131,7 +136,7 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
       name: validateData.data?.name,
       phoneNumber: validateData.data?.phoneNumber,
       address: validateData.data?.address,
-      avatarUrl: imageUrl,
+      avatar: imageUrl,
     };
 
     const savedClient = await Client.create(validateClient);
@@ -143,7 +148,7 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
       email: savedClient.email,
       phoneNumber: savedClient.phoneNumber,
       address: savedClient.address,
-      avatarUrl: savedClient.avatarUrl,
+      avatar: savedClient.avatar,
     };
 
     return NextResponse.json(
