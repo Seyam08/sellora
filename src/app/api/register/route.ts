@@ -161,7 +161,7 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
       }
     );
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     // if (error instanceof Error) {
     //   return NextResponse.json(
     //     {
