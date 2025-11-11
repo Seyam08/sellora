@@ -23,10 +23,12 @@ import {
 } from "@/components/ui/popover";
 import { cn } from "@/lib/utils";
 import { ZodClientSchema } from "@/schemas/client.schema";
+import { ErrorResponse, SuccessResponse } from "@/types/api/ResponseTypes";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { CircleMinus } from "lucide-react";
 import Link from "next/link";
 import { Controller, useForm } from "react-hook-form";
+import { toast } from "sonner";
 import z from "zod";
 
 // extend schema
@@ -35,7 +37,7 @@ const ExtendedZodClientSchema = ZodClientSchema.extend({
     .string({
       error: (issue) =>
         issue.input === undefined
-          ? `${issue.path} is required.`
+          ? `Please confirm your password.`
           : `${issue.path} should be ${issue.expected}.`,
     })
     .min(6, "Password must be at least 6 characters")
@@ -60,11 +62,70 @@ export function UserRegistrationForm({
 }: React.ComponentProps<"div">) {
   const form = useForm<z.infer<typeof ExtendedZodClientSchema>>({
     resolver: zodResolver(ExtendedZodClientSchema),
-    defaultValues: {},
+    defaultValues: {
+      name: "",
+      username: "",
+      email: "",
+      password: "",
+      confirmPassword: "",
+      phoneNumber: "",
+      address: "",
+      avatar: undefined,
+    },
   });
 
-  function onSubmit(values: z.infer<typeof ExtendedZodClientSchema>) {
-    console.log(values);
+  async function onSubmit(values: z.infer<typeof ExtendedZodClientSchema>) {
+    try {
+      const { setError, clearErrors, reset } = form;
+
+      const formData = new FormData();
+
+      Object.entries(values).forEach(([key, value]) => {
+        if (key === "confirmPassword") return;
+        if (value instanceof File) formData.append(key, value);
+        else if (value !== undefined && value !== null)
+          formData.append(key, String(value));
+      });
+
+      const requestOptions = {
+        method: "POST",
+        body: formData,
+      };
+
+      const res = await fetch("api/register", requestOptions);
+
+      if (!res.ok) {
+        const data: ErrorResponse = await res.json();
+        const message = data.errors.message;
+        const errors: {
+          email?: string;
+          username?: string;
+          phoneNumber?: string;
+        } = data.errors.error ?? {};
+
+        if (errors?.email) {
+          setError("email", { message: `${errors.email} - ${message}` });
+        }
+        if (errors?.username) {
+          setError("username", { message: `${errors.username} - ${message}` });
+        }
+        if (errors?.phoneNumber) {
+          setError("phoneNumber", {
+            message: `${errors.phoneNumber} - ${message}`,
+          });
+        }
+
+        toast.error(message);
+      }
+      if (res.ok) {
+        const data: SuccessResponse = await res.json();
+        reset();
+        clearErrors();
+        toast.success(data.message);
+      }
+    } catch (error) {
+      toast.error("Something went wrong!");
+    }
   }
 
   return (
