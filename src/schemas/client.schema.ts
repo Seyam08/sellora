@@ -53,3 +53,6 @@ export const ZodClientSchema = z.strictObject({
 
 // infer TypeScript type directly from schema
 export type ZodClientType = z.infer<typeof ZodClientSchema>;
+export type RegisterErrorType = z.ZodFlattenedError<
+  z.input<typeof ZodClientSchema>
+>;
