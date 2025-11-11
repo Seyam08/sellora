@@ -1,4 +1,5 @@
 import { ThemeProvider } from "@/components/theme-provider";
+import { Toaster } from "@/components/ui/sonner";
 import { connectDB } from "@/lib/mongoConnection";
 import type { Metadata } from "next";
 import { Geist } from "next/font/google";
@@ -31,6 +32,7 @@ export default async function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
+          <Toaster position="top-center" duration={5000} />
           {children}
         </ThemeProvider>
       </body>
