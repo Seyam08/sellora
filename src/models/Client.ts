@@ -44,8 +44,12 @@ export const ClientSchema = new Schema(
       default: [],
     },
     avatar: {
-      url: { type: String, trim: true, required: true },
-      publicId: { type: String, trim: true, required: true },
+      _id: false,
+      type: {
+        url: { type: String, trim: true, required: false },
+        publicId: { type: String, trim: true, required: false },
+      },
+      required: false,
     },
   },
   {
