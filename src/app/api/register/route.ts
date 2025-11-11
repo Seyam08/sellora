@@ -12,7 +12,7 @@ import {
 } from "@/lib/api/register/checkCredentialsExists";
 import { connectDB } from "@/lib/mongoConnection";
 import { Client } from "@/models/Client";
-import { ZodClientSchema } from "@/schemas/client.schema";
+import { RegisterErrorType, ZodClientSchema } from "@/schemas/client.schema";
 import { ClientResponseType, ClientType } from "@/types/api/RegisterTypes";
 import { ErrorResponse, SuccessResponse } from "@/types/api/ResponseTypes";
 import { ImageUrl } from "@/types/globalTypes";
@@ -55,12 +55,12 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
       const { formErrors, fieldErrors } = z.flattenError(validateData.error);
       const extractedFormError = getZodFormError(formErrors);
 
-      const errorRes: ErrorResponse<object> = {
+      const errorRes: ErrorResponse<RegisterErrorType> = {
         errors: {
           message: "Register validation failed",
           error: {
-            unrecognizedField: extractedFormError,
-            ...fieldErrors,
+            formErrors: extractedFormError,
+            fieldErrors: { ...fieldErrors },
           },
         },
       };
@@ -153,7 +153,7 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
 
     return NextResponse.json(
       {
-        message: "success",
+        message: "User Registration successful.",
         data: responseData,
       } satisfies SuccessResponse<ClientResponseType>,
       {
@@ -161,6 +161,7 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
       }
     );
   } catch (error) {
+    console.log(error);
     // if (error instanceof Error) {
     //   return NextResponse.json(
     //     {
