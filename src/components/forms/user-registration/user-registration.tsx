@@ -29,6 +29,7 @@ import { CircleMinus } from "lucide-react";
 import Link from "next/link";
 import { Controller, useForm } from "react-hook-form";
 import { toast } from "sonner";
+import useSWRMutation from "swr/mutation";
 import z from "zod";
 
 // extend schema
@@ -56,10 +57,26 @@ const ExtendedZodClientSchema = ZodClientSchema.extend({
   }
 );
 
+export const registerUser = async (
+  url: string,
+  { arg }: { arg: FormData }
+): Promise<Response> => {
+  const res = await fetch(url, {
+    method: "POST",
+    body: arg,
+  });
+
+  return res;
+};
+
 export function UserRegistrationForm({
   className,
   ...props
 }: React.ComponentProps<"div">) {
+  const { data, error, isMutating, trigger } = useSWRMutation(
+    "api/register",
+    registerUser
+  );
   const form = useForm<z.infer<typeof ExtendedZodClientSchema>>({
     resolver: zodResolver(ExtendedZodClientSchema),
     defaultValues: {
@@ -92,7 +109,8 @@ export function UserRegistrationForm({
         body: formData,
       };
 
-      const res = await fetch("api/register", requestOptions);
+      // const res = await fetch("api/register", requestOptions);
+      const res = await trigger(formData);
 
       if (!res.ok) {
         const data: ErrorResponse = await res.json();
@@ -127,6 +145,8 @@ export function UserRegistrationForm({
       toast.error("Something went wrong!");
     }
   }
+
+  console.log({ data, error, isMutating });
 
   return (
     <div className={cn("w-full flex flex-col gap-6", className)} {...props}>
