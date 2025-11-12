@@ -1,4 +1,5 @@
 "use client";
+import { registerUser } from "@/components/forms/fetcher/fetcher";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import {
@@ -21,9 +22,9 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import { Spinner } from "@/components/ui/spinner";
 import { cn } from "@/lib/utils";
 import { ZodClientSchema } from "@/schemas/client.schema";
-import { ErrorResponse, SuccessResponse } from "@/types/api/ResponseTypes";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { CircleMinus } from "lucide-react";
 import Link from "next/link";
@@ -57,26 +58,17 @@ const ExtendedZodClientSchema = ZodClientSchema.extend({
   }
 );
 
-export const registerUser = async (
-  url: string,
-  { arg }: { arg: FormData }
-): Promise<Response> => {
-  const res = await fetch(url, {
-    method: "POST",
-    body: arg,
-  });
-
-  return res;
-};
-
 export function UserRegistrationForm({
   className,
   ...props
 }: React.ComponentProps<"div">) {
-  const { data, error, isMutating, trigger } = useSWRMutation(
-    "api/register",
-    registerUser
-  );
+  const {
+    data,
+    error,
+    isMutating,
+    trigger,
+    reset: SWRreset,
+  } = useSWRMutation("api/register", registerUser);
   const form = useForm<z.infer<typeof ExtendedZodClientSchema>>({
     resolver: zodResolver(ExtendedZodClientSchema),
     defaultValues: {
@@ -92,9 +84,10 @@ export function UserRegistrationForm({
   });
 
   async function onSubmit(values: z.infer<typeof ExtendedZodClientSchema>) {
-    try {
-      const { setError, clearErrors, reset } = form;
+    const { setError, clearErrors, reset } = form;
 
+    try {
+      // Prepare form data
       const formData = new FormData();
 
       Object.entries(values).forEach(([key, value]) => {
@@ -104,49 +97,33 @@ export function UserRegistrationForm({
           formData.append(key, String(value));
       });
 
-      const requestOptions = {
-        method: "POST",
-        body: formData,
-      };
+      // Trigger the mutation
+      const result = await trigger(formData);
 
-      // const res = await fetch("api/register", requestOptions);
-      const res = await trigger(formData);
+      // If successful
+      reset();
+      clearErrors();
+      SWRreset();
+      toast.success(result.message);
+    } catch (err: any) {
+      //  Error thrown from registerUser()
+      const message = err?.message ?? "Something went wrong";
+      const fields = err?.fields ?? {};
 
-      if (!res.ok) {
-        const data: ErrorResponse = await res.json();
-        const message = data.errors.message;
-        const errors: {
-          email?: string;
-          username?: string;
-          phoneNumber?: string;
-        } = data.errors.error ?? {};
+      if (fields.email)
+        setError("email", { message: `${fields.email} - ${message}` });
 
-        if (errors?.email) {
-          setError("email", { message: `${errors.email} - ${message}` });
-        }
-        if (errors?.username) {
-          setError("username", { message: `${errors.username} - ${message}` });
-        }
-        if (errors?.phoneNumber) {
-          setError("phoneNumber", {
-            message: `${errors.phoneNumber} - ${message}`,
-          });
-        }
+      if (fields.username)
+        setError("username", { message: `${fields.username} - ${message}` });
 
-        toast.error(message);
-      }
-      if (res.ok) {
-        const data: SuccessResponse = await res.json();
-        reset();
-        clearErrors();
-        toast.success(data.message);
-      }
-    } catch (error) {
-      toast.error("Something went wrong!");
+      if (fields.phoneNumber)
+        setError("phoneNumber", {
+          message: `${fields.phoneNumber} - ${message}`,
+        });
+
+      toast.error(message);
     }
   }
-
-  console.log({ data, error, isMutating });
 
   return (
     <div className={cn("w-full flex flex-col gap-6", className)} {...props}>
@@ -363,8 +340,18 @@ export function UserRegistrationForm({
 
               {/* submit button  */}
               <Field>
-                <Button type="submit" className="cursor-pointer">
-                  Create Account
+                <Button
+                  type="submit"
+                  className="cursor-pointer"
+                  disabled={isMutating}
+                >
+                  {isMutating ? (
+                    <>
+                      Creating... <Spinner />
+                    </>
+                  ) : (
+                    "Create Account"
+                  )}
                 </Button>
                 <Button variant="outline" type="button">
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
